@@ -11,28 +11,32 @@ describe Grid do
 		end
 
 		it "should have an unsolved first cell" do  
-			expect(grid.cells.first).to eq('0')
+			expect(grid.cells.first.value).to eq(0)
 		end
 
 		it "should have a solved second cell with value 1" do 
-			expect(grid.cells[1]).to eq('1')
+			expect(grid.cells.at(1).value).to eq(1)
 		end
+	
 	end
+
 
 	context "solving sudoku" do 
-		# let(:puzzle)
-		# let(:grid)
+		let(:puzzle) {'015003002000100906270068430490002017501040380003905000900081040860070025037204600'}
+		let(:grid) {Grid.new(puzzle)}
 
-		# it "can solve the puzzle" do 
+		it "should get a row of cell 11" do 
+			expect(grid.calculate_neighbor(0)).to eq([0, 1, 5, 0, 0, 3, 0, 0, 2, 0, 0, 2, 4, 5, 0, 9, 8, 0, 0, 1, 5, 0, 0, 0, 2, 7, 0])
+		end
+
+		it "can solve the puzzle" do 
 			
-		# end
+		end
 
 	end
 
-
-
 end
-
+# 6	
 # 015003002
 # 000100906
 # 270068430
