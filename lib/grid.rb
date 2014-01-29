@@ -15,13 +15,22 @@ class Grid
 		@cells.length == DEFAULT_CELLS_LENGTH
 	end
 
-	def check_column
+	def create_rows
+		# Like most iterator methods, 
+		# each_slice returns an enumerable when called without a block, 
+		# which you can then call further enumerable methods on.
+		@rows = @cells.each_slice(9).map{|x| p x}			# shows nested array of each rows
 	end
 
-	def check_row
+	def create_columns
+		@column = @rows.transpose			# shows nested array of each columns
 	end
 
-	def check_box
+
+	def create_boxes
+		small_rows = @rows.map {|row| row.each_slice(3).map{|x| p x}}
+		boxes = small_rows.transpose.flatten
+		box = boxes.each_slice(9).map{|x| p x}		# shows nested array of each boxes
 	end
 
 	def solve

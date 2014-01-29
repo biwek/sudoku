@@ -8,7 +8,6 @@ describe Grid do
 		
 		it "should have 81 cells" do
 			expect(grid).to have_correct_number_of_cells
-			puts grid.cells.class
 		end
 
 		it "should have an unsolved first cell" do  
@@ -18,6 +17,16 @@ describe Grid do
 		it "should have a solved second cell with value 1" do 
 			expect(grid.cells[1]).to eq('1')
 		end
+	end
+
+	context "solving sudoku" do 
+		# let(:puzzle)
+		# let(:grid)
+
+		# it "can solve the puzzle" do 
+			
+		# end
+
 	end
 
 
