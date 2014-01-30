@@ -1,11 +1,3 @@
-# TODO - steps:
-# each cells need to have a key as their number when being initialized - how?
-# then get the rows, column and boxes of that cell and put it in an array called (neighbors)
-# after subtracting it from (1..9) array get the candidates
-# if the candidates is more than one, don't put it in the cell and take another cell number
-# if contains only one candidate place the value into the cell.
-
-
 class Grid
 
 	SIZE = 81
@@ -24,8 +16,8 @@ class Grid
 	end
 
 	def rows
-		# Like most iterator methods, 
-		# each_slice returns an enumerable when called without a block, 
+		# Like most iterator methods, each_slice returns 
+		# an enumerable when called without a block, 
 		# which you can then call further enumerable methods on.
 		@cells.each_slice(9).map{|x| p x}			# shows nested array of each rows
 	end
@@ -41,7 +33,7 @@ class Grid
 		boxes.each_slice(9).map{|x| p x}		# shows nested array of each boxes
 	end
 
-	def calculate_neighbor(cell)
+	def calculate_neighbors(cell)
 		nbor = []
 		# create_rows
 		rows.each do |row| 
@@ -64,32 +56,27 @@ class Grid
 			end
 		end
 
-		return nbor.flatten.map {|c| c.value}
+		return @neighbor = nbor.flatten.map {|c| c.value}
 	end
-
 
 
 	def solved?
-		# cell.filled_out?
+		cells.all? {|cell| cell.filled_out?}
 	end
 
-	# neighbors << related rows, column and box 
 
 	def solve
-		# outstanding_before = SIZE
-		# looping = false
-		# while !solved? && !looping
-		# 	# cell.solve
-			
-		# 	# how to use cell object / neighbors
-
-		# 	outstanding = @cells.count {|c| c.solved?}
-		# 	looping = outstanding_before == outstanding
-		# 	outstanding_before = outstanding
-		# end
-
-
-
+		loop do 
+			cells.map.with_index do |c, i| 
+					calculate_neighbors(i)
+					candidate = (1..9).to_a - @neighbor
+					if candidate.length == 1 && cells.at(i).value == 0
+						cells.at(i).value = candidate.join.to_i
+					end					
+			end
+			break if solved?
+		end
+		return @cells.map {|cell| cell.value}.join
 	end
 
 end
